@@ -1,0 +1,24 @@
+---  #creating user , adding into sshd_configfile
+- name: Adding users for system
+  hosts: all
+  become: yes
+  vars:
+    new_user: "username" #enter the user name
+    new_password: "passwd12" #enter the password 
+  tasks:
+  - name: Creating the users  #Creating the user   
+    user:
+     name: "{{new_user}}"
+     state: present
+  - name: "Setting up the password"  #Setting up the password
+    user:
+      name: "{{new_user}}"
+      password: "{{new_password | password_hash('sha512')}}"
+      update_password: on_create
+  - name: Add new user entry on sshd_config file  #Add new user entry on sshd_config file
+    lineinfile:
+      path: /etc/ssh/sshd_config
+      regexp: '^\s*AllowUsers\s+(.*)$'
+      line: 'AllowUsers {(new_user)} \1'
+      state: present
+      backrefs: yes 

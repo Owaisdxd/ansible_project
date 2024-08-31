@@ -1,0 +1,13 @@
+---  #how we can remove the user you can use ansible vault to encode the file as it contians sensitive data 
+- name: Running on windows
+  hosts: windows
+  gather_facts: no
+  vars:
+    uname: #username
+    passwd: #password
+  tasks:
+  - name: Removing the user
+      win_user:
+      name: "{{uname}}"
+      password: "{{passwd}}"
+      state: absent

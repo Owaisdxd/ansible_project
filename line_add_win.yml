@@ -1,0 +1,10 @@
+---  #how we can add line in perticular file
+- name: running on windows
+  hosts: windows 
+  gather_facts: no
+  tasks:
+  - name: adding line into the file
+    win_lineinfile:
+      path: c:\Users\aadmin\Desktop\to_linux.txt
+      line: "This is form \n  linux ansible \n playbook"  #line to be added
+      state: present   #present (add) absent (remove)

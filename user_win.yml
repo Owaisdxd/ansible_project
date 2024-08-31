@@ -1,0 +1,13 @@
+---  #How we can create the user and 
+- name: running on windows 
+  hosts: windows
+  gather_facts: no
+  vars:
+    uname: abcuser #username
+    passwd: abc12 #password 
+  tasks:
+  - name: Creating the User
+    win_user:
+      name: "{{uname}}"
+      password: "{{passwd}}"
+      state: present 

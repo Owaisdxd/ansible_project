@@ -1,0 +1,10 @@
+---  #fetching file from windows machine
+- name: running on windows hosts 
+  hosts: windows  #hosts
+  gather_facts: no
+  tasks:
+  - name: Fetching from windows 
+    fetch:
+      src: c:\Users\aadmin\Desktop\to_linux.txt  #source
+      dest: /home/vagrant/ #destination
+      flat: yes #directly get the file

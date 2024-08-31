@@ -1,0 +1,9 @@
+---  # stopping the service in windows hosts
+- name: runnig on windows host
+  hosts: windows
+  gather_facts: no
+  tasks:
+  - name: removing ther service
+    win_service:
+      name: httpd
+      state: stopped   # started (start) stopped (stop) ,restarted(restart)

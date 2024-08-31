@@ -1,0 +1,15 @@
+---  #how you can install package and enable the the specific port number as per package  
+- hosts: all #all available host (linux)
+  become: yes #sudo permission()
+  tasks:
+  - name: "Installing the httpd packages"
+    yum:
+      name: httpd  # package name 
+      state: present # state present(install),absent(uninstall)
+  - name: "Enableing the port 80"
+    firewalld:  #(Using filewalld to enable the port for data )
+      port: 80/tcp
+      permanent: yes
+      state: enabled  #enabled(opne) disabled(close)
+      immediate: yes  #(to apply the change quickly)
+

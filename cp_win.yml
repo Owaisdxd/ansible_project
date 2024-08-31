@@ -1,0 +1,10 @@
+---
+- name: We are runnig the script for windows
+  hosts: windows #windows as a host machine you can choose what ever name 
+  gather_facts: no  #for fast resulsts
+  tasks:
+  - name: Copying the file to windows hosts
+    win_copy:
+      src: /home/aadmin/data.txt  #source file
+      dest: c:\Users\aadmin\Desktop\   #destination
+

@@ -1,0 +1,19 @@
+---  #how we can download the service , install and enable it in windows host
+- name: running on windows hosts
+  hosts: windows
+  gather_facts: no #for fast execution
+  tasks:
+  - name: Downlaoding the file 
+    win_get_url: #Donwloading the package using the provided link
+      url: https://archive.apache.org/dist/httpd/binaries/win32/apache_1.3.17-win32-src.msi #choosing msi file, we can select .exe but need to give instruction while installing
+      dest: C:\Users\aadmin\Desktop\apache_1.3.17-win32-src.msi   #where the package is residing 
+  - name: Installing the Apache package
+    win_package: #installing the package from destination 
+      path: C:\Users\aadmin\Desktop\apache_1.3.17-win32-src.msi
+      state: present  #state present (install) absent (uninstall)
+  - name: Enabling the service
+    win_service: #enable the service u
+      name: httpd #name of the service (can be customized)
+      path: C:\Users\aadmin\Desktop\apache_1.3.17-win32-src.msi #downloaded package
+      display_name: httpd   #name will be displayed when check in windows servcies.msc
+      description: This is httpd server  #optional 

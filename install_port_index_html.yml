@@ -1,0 +1,40 @@
+--- #Installing httpd , enablling(opening) the port , copying index.html file from source(src) to destination(dest) 
+- name: Started working on the tasks
+  hosts: all  #hosts for now centos
+  become: yes #sudo permission
+  tasks:
+  - name: installing the httpd server
+    yum:   
+      name: httpd
+      state: present
+  - name: "Enableing the port for httpd"
+    firewalld:
+      port: 80/tcp
+      permanent: yes
+      state: enabled
+      immediate: yes
+  - name: copying the idex.html file to /var/www/html
+    copy:
+      src: /home/aadmin/index.html
+      dest: /var/www/html/
+  - name: starting the server of httpd
+    systemd:
+      name: httpd
+      state: started
+      enabled: yes
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+         
