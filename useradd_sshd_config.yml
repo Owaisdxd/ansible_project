@@ -20,5 +20,5 @@
       path: /etc/ssh/sshd_config
       regexp: '^\s*AllowUsers\s+(.*)$'
       line: 'AllowUsers {(new_user)} \1'
-      state: present
+      state: present             #state present means yes enable 
       backrefs: yes 
